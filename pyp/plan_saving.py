@@ -87,15 +87,6 @@ NAV_STOCK_INVEST = 33.47
 
 #--------------------------------------------------#
 
-MONTHLY_GAIN_401K_WORK = RETURN_YTD_STOCK_401K / 12
-MONTHLY_GAIN_INVEST_WORK = RETURN_YTD_STOCK_INVEST / 12
-
-MONTHLY_GAIN_401K_EARLY_RETIRE = RETURN_LIFE_STOCK_401K / 12
-MONTHLY_GAIN_INVEST_EARLY_RETIRE = RETURN_LIFE_STOCK_INVEST / 12
-
-MONTHLY_GAIN_401K_RETIRE = RETURN_LIFE_STOCK_401K / 12
-MONTHLY_GAIN_INVEST_RETIRE = RETURN_LIFE_STOCK_INVEST / 12
-
 JSON_FILE = None
 HTML_FILE = None
 
@@ -255,7 +246,44 @@ if len(sys.argv) > 1:
             except Exception as e:
                 print('=> [E] ' + str(e))
                                                                                                                                                          
+        v = JSD['information_of_bought_stocks'].strip()
+        if len(v) > 0:
+            try:
+                vjsd = json.loads(v)
+
+                #--------------------------------------------------#
+
+                NAME_STOCK_401K = vjsd['401k']['name']
+                LINK_STOCK_401K = vjsd['401k']['link']
+                RETURN_1Y_STOCK_401K = float(vjsd['401k']['return_1y'])
+                RETURN_3Y_STOCK_401K = float(vjsd['401k']['return_3y'])
+                RETURN_YTD_STOCK_401K = float(vjsd['401k']['return_ytd'])
+                RETURN_LIFE_STOCK_401K = float(vjsd['401k']['return_life'])
+                NAV_STOCK_401K = float(vjsd['401k']['nav'])
+
+                #--------------------------------------------------#
+
+                NAME_STOCK_INVEST = vjsd['invest']['name']
+                LINK_STOCK_INVEST = vjsd['invest']['link']
+                RETURN_1Y_STOCK_INVEST = float(vjsd['invest']['return_1y'])
+                RETURN_3Y_STOCK_INVEST = float(vjsd['invest']['return_3y'])
+                RETURN_YTD_STOCK_INVEST = float(vjsd['invest']['return_ytd'])
+                RETURN_LIFE_STOCK_INVEST = float(vjsd['invest']['return_life'])
+                NAV_STOCK_INVEST = float(vjsd['invest']['nav'])
+                                                        
+            except Exception as e:
+                print('=> [E] ' + str(e))
                                                                                                                                                          
+
+
+MONTHLY_GAIN_401K_WORK = RETURN_YTD_STOCK_401K / 12
+MONTHLY_GAIN_INVEST_WORK = RETURN_YTD_STOCK_INVEST / 12
+
+MONTHLY_GAIN_401K_EARLY_RETIRE = RETURN_LIFE_STOCK_401K / 12
+MONTHLY_GAIN_INVEST_EARLY_RETIRE = RETURN_LIFE_STOCK_INVEST / 12
+
+MONTHLY_GAIN_401K_RETIRE = RETURN_LIFE_STOCK_401K / 12
+MONTHLY_GAIN_INVEST_RETIRE = RETURN_LIFE_STOCK_INVEST / 12
                 
 #==========^^^^^==========>] OPTIONS [<==========^^^^^==========#
 
